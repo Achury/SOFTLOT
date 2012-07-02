@@ -1,0 +1,44 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite-Trading" verbose="3">
+	<test name="Employees">
+		<groups>
+			<run>
+				
+				<!-- <include name="grupo-autenticar"/> -->
+				<!--<include name="grupo-crear" />--> 
+				<!--<include name="grupo-borrar" /> -->	
+				<!--<include name="grupo-actualizar" />	-->				
+				<!--<include name="grupo-obtener" />-->
+			</run>
+		</groups>
+		<classes>
+
+			<!--<class name="test.security.EmployeeTestNG" />--> 
+			 <!--<class name="test.security.OptionTestNG" />--> 
+			 <!--<class name="test.security.ResourceTestNG" />--> 
+			 <!--<class name="test.security.EmployeeTestNG" />--> 
+			 <!--<class name="test.security.OptionTestNG" />--> 
+			<!-- <class name="test.security.ResourceTestNG" /> -->
+			<!-- <class name="test.security.RoleTestNG" /> -->
+			<!--<class name="test.setup.MasterTestNG" /> -->
+			<!-- <class name="test.setup.CityTestNG" /> -->
+			<!-- <class name="test.setup.CarrierTestNG" /> -->
+			<!-- <class name="test.setup.MasterValueTestNG" /> -->
+			<!--<class name="test.BussinessPartners.CallHistoryTestNG" /> -->
+			<!--<class name="test.BussinessPartners.AddressTestNG" />--> 
+			<!--<class name="test.BussinessPartners.CourierAccountTestNG" />--> 
+			<!--<class name="test.BussinessPartners.PartnerDepartmentInfoTestNG" />--> 
+			<!--<class name="test.BussinessPartners.PhoneTestNG" />--> 
+			<!--<class name="test.BussinessPartners.ShipPickupTestNG" /> -->
+			<class name="test.LODepartment.shipments.BlTestNG" /> 
+			<class name="test.LODepartment.shipments.BlDetailTestNG" />
+			<class name="test.LODepartment.shipments.BlFreightInvoiceTestNG" />
+			<class name="test.LODepartment.shipments.BlInlandCSTestNG" />
+			<class name="test.LODepartment.shipments.BlUnCodeTestNG" />
+			<class name="test.LODepartment.shipments.BlOtherChargeTestNG" />
+			<class name="test.LODepartment.shipments.BlOtherInvoiceTestNG" />
+			<!--<class name="test.BussinessPartners.PartnerContactTestNG" />-->
+		</classes>
+	</test>
+</suite>

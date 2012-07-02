@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="5" verbose="3" name="Failed suite [Suite-Trading]" annotations="JDK">
+  <test name="Employees(failed)" junit="false" annotations="JDK">
+    <groups>
+      <run>
+        <include name="grupo-obtener"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="test.security.EmployeeTestNG">
+        <methods>
+          <include name="loadOptions"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13025567032080" configfile="/SOFTLOT/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="jsp/login/login" id="pf13210346035960" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf13210346035971 pf13210346035972" inlinks="pf13210346035971 pf13210346035973" path="/jsp/login/login.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="jsp/login/principal" id="pf13210346035974" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf13210346035972" path="/jsp/login/principal.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="jsp/login/logout" id="pf13210346035975" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf13210346035973" path="/jsp/login/logout.jsp"/>
+  <links id="pf13210346035971" target="pf13210346035960" source="pf13210346035960" outcome="NO_AUTH"/>
+  <links id="pf13210346035972" target="pf13210346035974" source="pf13210346035960" outcome="AUTH"/>
+  <links id="pf13210346035973" target="pf13210346035960" source="pf13210346035975" outcome="LOGIN"/>
+</pageflow:Pageflow>

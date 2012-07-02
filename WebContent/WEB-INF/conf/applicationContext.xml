@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	
+	<!-- 1. Definición de la referencia al origen de datos -->
+	
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
+		<property name="jndiName" value="/jdbc/tradingDS"/>
+		<property name="resourceRef" value="true" />
+	</bean>
+	
+	<!-- 2. Manejador de Transacciones -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 3. Definición de objetos de la capa de acceso a datos -->
+	
+	 <!-- 3.1 Business Partners -->
+	 
+	 <bean id="addressDao" class="com.lotrading.softlot.businessPartners.dao.impl.AddressDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="callHistoryDao" class="com.lotrading.softlot.businessPartners.dao.impl.CallHistoryDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="courierAccountDao" class="com.lotrading.softlot.businessPartners.dao.impl.CourierAccountDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="partnerContactDao" class="com.lotrading.softlot.businessPartners.dao.impl.PartnerContactDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="partnerDao" class="com.lotrading.softlot.businessPartners.dao.impl.PartnerDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="partnerDepartmentInfoDao" class="com.lotrading.softlot.businessPartners.dao.impl.PartnerDepartmentInfoDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="phoneDao" class="com.lotrading.softlot.businessPartners.dao.impl.PhoneDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="shipPickupDao" class="com.lotrading.softlot.businessPartners.dao.impl.ShipPickupDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="clientRateDao" class="com.lotrading.softlot.businessPartners.dao.impl.ClientRateDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	<!-- 3.2 Security Module -->	
+	
+	<bean id="employeeDao" class="com.lotrading.softlot.security.dao.impl.EmployeeDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="optionDao" class="com.lotrading.softlot.security.dao.impl.OptionDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="resourceDao" class="com.lotrading.softlot.security.dao.impl.ResourceDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="roleDao" class="com.lotrading.softlot.security.dao.impl.RoleDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+		
+	<bean id="securityFilter" class="com.lotrading.softlot.security.infraestructure.SecurityFilter">
+		<property name="resourceLogic" ref="resourceLogic"/>
+		<property name="employeeLogic" ref="employeeLogic"/>
+		<property name="roleLogic" ref="roleLogic"/>
+    </bean>
+    
+    <!-- 3.3 Setup Module -->
+    <bean id="masterDao" class="com.lotrading.softlot.setup.dao.impl.MasterDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+    <bean id="masterValueDao" class="com.lotrading.softlot.setup.dao.impl.MasterValuesDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="cityDao" class="com.lotrading.softlot.setup.dao.impl.CityDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="portDao" class="com.lotrading.softlot.setup.dao.impl.PortDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="carrierDao" class="com.lotrading.softlot.setup.dao.impl.CarrierDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="carrierAwbNumberDao" class="com.lotrading.softlot.setup.dao.impl.CarrierAwbNumberDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="carrierRateDao" class="com.lotrading.softlot.setup.dao.impl.CarrierRateDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+   
+  	<!-- 3.4 Util Module -->
+  	
+  	
+  	<!-- 3.5 Client Order Module -->
+  	
+  	 <bean id="clientOrderDao" class="com.lotrading.softlot.LODepartment.clientOrder.dao.impl.ClientOrderDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="callHistoryClieOrdDao" class="com.lotrading.softlot.LODepartment.clientOrder.dao.impl.CallHistoryClientOrderDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="clientOrderInlandCSDao" class="com.lotrading.softlot.LODepartment.clientOrder.dao.impl.ClientOrderInlandCSDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="clientOrderSupplierInfoDao" class="com.lotrading.softlot.LODepartment.clientOrder.dao.impl.ClientOrderSupplierInfoDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	<!-- 3.6 Air Shipments Module -->
+	<bean id="awbDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbItemsDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbItemsDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbFreightInvoiceDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbFreightInvoiceDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbInlandCsDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbInlandCsDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbPalletizedItemDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbPalletizedItemDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbOtherInvoiceDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbOtherInvoiceDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbUnCodeDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbUnCodeDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbCostSaleDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbCostSaleDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="awbEEIDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.AwbEEIDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 3.7 Ocean Shipments Module -->
+	 <bean id="blDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="blItemDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlItemDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="blPalletizedItemDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlPalletizedItemDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="blUnCodeDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlUnCodeDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="blCostSaleDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlCostSaleDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="blEEIDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlEEIDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="blContainerDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlContainerDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="blInlandCSDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlInlandCSDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>	
+	<bean id="blFreightInvoiceDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlFreightInvoiceDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>	
+	<bean id="blOtherInvoiceDao" class="com.lotrading.softlot.LODepartment.shipments.dao.impl.BlOtherInvoiceDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	<!-- 3.8 Warehouse Module -->
+	 <bean id="whReceiptDao" class="com.lotrading.softlot.warehouse.dao.impl.WhReceiptDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="whItemDao" class="com.lotrading.softlot.warehouse.dao.impl.WhItemDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="whLocationDao" class="com.lotrading.softlot.warehouse.dao.impl.WhLocationDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 3.9 Invoice Module -->
+	 <bean id="palletizedItemDao" class="com.lotrading.softlot.invoice.dao.impl.PalletizedItemDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="invoiceDao" class="com.lotrading.softlot.invoice.dao.impl.InvoiceDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="packingListItemDao" class="com.lotrading.softlot.invoice.dao.impl.PackingListItemDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 4. Definición de objetos de la capa de negocio -->
+	
+	<!-- 4.1 Business Partners Module -->
+	
+	<bean id="addressLogic" class="com.lotrading.softlot.businessPartners.logic.impl.AddressLogicImpl">
+		<property name="addressDao" ref="addressDao"/>
+	</bean>	
+	
+	<bean id="callHistoryLogic" class="com.lotrading.softlot.businessPartners.logic.impl.CallHistoryLogicImpl">
+		<property name="callHistoryDao" ref="callHistoryDao"/>
+	</bean>
+	
+	<bean id="courierAccountLogic" class="com.lotrading.softlot.businessPartners.logic.impl.CourierAccountLogicImpl">
+		<property name="courierAccountDao" ref="courierAccountDao"/>
+	</bean>
+	
+	<bean id="partnerContactLogic" class="com.lotrading.softlot.businessPartners.logic.impl.PartnerContactLogicImpl">
+		<property name="partnerContactDao" ref="partnerContactDao"/>
+		<property name="addressLogic" ref="addressLogic"/> 
+		<property name="phoneLogic" ref="phoneLogic"/>
+	</bean>	
+	
+	<bean id="partnerDepartmentInfoLogic" class="com.lotrading.softlot.businessPartners.logic.impl.PartnerDepartmentInfoLogicImpl">
+		<property name="partnerDepartmentInfoDao" ref="partnerDepartmentInfoDao"/>
+	</bean>	
+	
+	<bean id="partnerLogic" class="com.lotrading.softlot.businessPartners.logic.impl.PartnerLogicImpl">
+		<property name="partnerDao" ref="partnerDao"/>
+		<property name="addressLogic" ref="addressLogic"/> 
+		<property name="phoneLogic" ref="phoneLogic"/> 
+		<property name="partnerDepartmentInfoLogic" ref="partnerDepartmentInfoLogic"/>
+	</bean>	
+	
+	<bean id="phoneLogic" class="com.lotrading.softlot.businessPartners.logic.impl.PhoneLogicImpl">
+		<property name="phoneDao" ref="phoneDao"/>
+	</bean>
+	
+	<bean id="shipPickupLogic" class="com.lotrading.softlot.businessPartners.logic.impl.ShipPickupLogicImpl">
+		<property name="shipPickupDao" ref="shipPickupDao"/>
+		<property name="addressLogic" ref="addressLogic"/>
+	</bean>
+	
+	<bean id="clientRateLogic" class="com.lotrading.softlot.businessPartners.logic.impl.ClientRateLogicImpl">
+		<property name="clientRateDao" ref="clientRateDao"/>
+	</bean>
+	
+	<!-- 4.2 Security Module -->
+	<bean id="employeeLogic" class="com.lotrading.softlot.security.logic.impl.EmployeeLogicImpl">
+		<property name="employeeDao" ref="employeeDao"/>
+		<property name="phoneLogic" ref="phoneLogic"/>
+	</bean>
+	
+	<bean id="optionLogic" class="com.lotrading.softlot.security.logic.impl.OptionLogicImpl">
+		<property name="optionDao" ref="optionDao"/>
+	</bean>
+	
+	<bean id="resourceLogic" class="com.lotrading.softlot.security.logic.impl.ResourceLogicImpl">
+		<property name="resourceDao" ref="resourceDao"/>
+	</bean>
+	
+	<bean id="roleLogic" class="com.lotrading.softlot.security.logic.impl.RoleLogicImpl">
+		<property name="roleDao" ref="roleDao"/>
+	</bean>
+	
+	<!-- 4.3 Setup Module -->
+	
+	<bean id="masterLogic" class="com.lotrading.softlot.setup.logic.impl.MasterLogicImpl">
+		<property name="masterDao" ref="masterDao"/>
+	</bean>
+	
+	<bean id="masterValueLogic" class="com.lotrading.softlot.setup.logic.impl.MasterValuesLogicImpl">
+		<property name="masterValueDao" ref="masterValueDao"/>
+	</bean>
+	
+	<bean id="cityLogic" class="com.lotrading.softlot.setup.logic.impl.CityLogicImpl">
+		<property name="cityDao" ref="cityDao"/>
+	</bean>
+	
+	<bean id="portLogic" class="com.lotrading.softlot.setup.logic.impl.PortLogicImpl">
+		<property name="portDao" ref="portDao"/>
+	</bean>
+	
+	<bean id="carrierLogic" class="com.lotrading.softlot.setup.logic.impl.CarrierLogicImpl">
+		<property name="carrierDao" ref="carrierDao"/>
+	</bean>
+	<bean id="carrierAwbNumberLogic" class="com.lotrading.softlot.setup.logic.impl.CarrierAwbNumberLogicImpl">
+		<property name="carrierAwbNumberDao" ref="carrierAwbNumberDao"/>
+	</bean>
+	<bean id="carrierRateLogic" class="com.lotrading.softlot.setup.logic.impl.CarrierRateLogicImpl">
+		<property name="carrierRateDao" ref="carrierRateDao"/>
+	</bean>
+	
+	
+	<!-- 4.4 Util Module -->
+	
+	<bean id="com.lotrading.softlot.util.lists.ClientStatusList" class="com.lotrading.softlot.util.lists.ClientStatusList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.CountryList" class="com.lotrading.softlot.util.lists.CountryList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.DepartmentList" class="com.lotrading.softlot.util.lists.DepartmentList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.DepartmentList2" class="com.lotrading.softlot.util.lists.DepartmentList2">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.LanguageList" class="com.lotrading.softlot.util.lists.LanguageList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.PaymentTermList" class="com.lotrading.softlot.util.lists.PaymentTermList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.StateList" class="com.lotrading.softlot.util.lists.StateList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.TruckCompanyList" class="com.lotrading.softlot.util.lists.TruckCompanyList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.BlTypeOfMovesList" class="com.lotrading.softlot.util.lists.BlTypeOfMovesList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.CourierList" class="com.lotrading.softlot.util.lists.CourierList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.CityList" class="com.lotrading.softlot.util.lists.CityList">
+		<property name="cityLogic" ref="cityLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.WhLocationList" class="com.lotrading.softlot.util.lists.WhLocationList">
+		<property name="whLocationLogic" ref="whLocationLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.EmployeeList" class="com.lotrading.softlot.util.lists.EmployeeList">
+		<property name="employeeLogic" ref="employeeLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.PhoneTypeList" class="com.lotrading.softlot.util.lists.PhoneTypeList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.ClientOrderStatusList" class="com.lotrading.softlot.util.lists.ClientOrderStatusList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.RegionsList" class="com.lotrading.softlot.util.lists.RegionsList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.SuppliersList" class="com.lotrading.softlot.util.lists.SuppliersList">
+		<property name="partnerLogic" ref="partnerLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.ClientsList" class="com.lotrading.softlot.util.lists.ClientsList">
+		<property name="partnerLogic" ref="partnerLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.CarrierList" class="com.lotrading.softlot.util.lists.CarrierList">
+		<property name="carrierLogic" ref="carrierLogic"/>
+	</bean>
+	
+	 <bean id="com.lotrading.softlot.util.lists.CarrierList2" class="com.lotrading.softlot.util.lists.CarrierList2">
+		<property name="carrierLogic" ref="carrierLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.IncotermList" class="com.lotrading.softlot.util.lists.IncotermList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.ShippingTypesList" class="com.lotrading.softlot.util.lists.ShippingTypesList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.PortsList" class="com.lotrading.softlot.util.lists.PortsList">
+		<property name="portLogic" ref="portLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.ShipmentStatusList" class="com.lotrading.softlot.util.lists.ShipmentStatusList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.BlShippingTypesList" class="com.lotrading.softlot.util.lists.BlShippingTypesList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	<bean id="com.lotrading.softlot.util.lists.UnitTypesList" class="com.lotrading.softlot.util.lists.UnitTypesList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	<bean id="com.lotrading.softlot.util.lists.SaidToContainList" class="com.lotrading.softlot.util.lists.SaidToContainList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	<bean id="com.lotrading.softlot.util.lists.ContainerTypeList" class="com.lotrading.softlot.util.lists.ContainerTypeList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.RateClassList" class="com.lotrading.softlot.util.lists.RateClassList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.PackingGroupUnCodeList" class="com.lotrading.softlot.util.lists.PackingGroupUnCodeList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	<bean id="com.lotrading.softlot.util.lists.ClassUnCodeList" class="com.lotrading.softlot.util.lists.ClassUnCodeList">
+		<property name="masterValueLogic" ref="masterValueLogic"/>
+	</bean>
+	
+	
+	
+	<!-- 4.5 Client Orders Module -->
+	<bean id="clientOrderLogic" class="com.lotrading.softlot.LODepartment.clientOrder.logic.impl.ClientOrderLogicImpl">
+		<property name="clientOrderDao" ref="clientOrderDao"/>
+	</bean>	
+	<bean id="callHistoryClieOrdLogic" class="com.lotrading.softlot.LODepartment.clientOrder.logic.impl.CallHistoryClientOrderLogicImpl">
+		<property name="callHistoryDao" ref="callHistoryClieOrdDao"/>
+	</bean>	
+	<bean id="clientOrderInlandCSLogic" class="com.lotrading.softlot.LODepartment.clientOrder.logic.impl.ClientOrderInlandCSLogicImpl">
+		<property name="clientOrderInlandCSDao" ref="clientOrderInlandCSDao"/>
+	</bean>	
+	<bean id="clientOrderSuppInfoLogic" class="com.lotrading.softlot.LODepartment.clientOrder.logic.impl.ClientOrderSupplierInfoLogicImpl">
+		<property name="clientOrderSuppInfoDao" ref="clientOrderSupplierInfoDao"/>
+	</bean>	
+	
+	
+	
+	<!-- 4.6 Air Shipments Module -->
+	<bean id="awbLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbLogicImpl">
+		<property name="awbDao" ref="awbDao"/>
+		<property name="carrierLogic" ref="carrierLogic"/>
+	</bean>
+	<bean id="awbItemsLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbItemsLogicImpl">
+		<property name="awbItemsDao" ref="awbItemsDao"/>
+	</bean>
+	<bean id="awbPalletizedItemLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbPalletizedItemLogicImpl">
+		<property name="awbPalletizedItemDao" ref="awbPalletizedItemDao"/>
+	</bean>
+	<bean id="awbFreightInvoiceLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbFreightInvoiceLogicImpl">
+		<property name="awbFreightInvoiceDao" ref="awbFreightInvoiceDao"/>
+	</bean>
+	<bean id="awbInlandCsLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbInlandCsLogicImpl">
+		<property name="awbInlandCsDao" ref="awbInlandCsDao"/>
+	</bean>
+	<bean id="awbOtherInvoiceLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbOtherInvoiceLogicImpl">
+		<property name="awbOtherInvoiceDao" ref="awbOtherInvoiceDao"/>
+	</bean>
+	<bean id="awbUnCodeLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbUnCodeLogicImpl">
+		<property name="awbUnCodeDao" ref="awbUnCodeDao"/>
+	</bean>
+	<bean id="awbCostSaleLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbCostSaleLogicImpl">
+		<property name="awbCostSaleDao" ref="awbCostSaleDao"/>
+	</bean>
+	<bean id="awbEEILogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.AwbEEILogicImpl">
+		<property name="awbEEIDao" ref="awbEEIDao"/>
+	</bean>
+	
+	
+	<!-- 4.7 Ocean Shipments Module -->
+	<bean id="blLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlLogicImpl">
+		<property name="blDao" ref="blDao"/>
+	</bean>	
+	<bean id="blItemLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlItemLogicImpl">
+		<property name="blItemDao" ref="blItemDao"/>
+	</bean>
+	<bean id="blPalletizedItemLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlPalletizedItemLogicImpl">
+		<property name="blPalletizedItemDao" ref="blPalletizedItemDao"/>
+	</bean>
+	
+	<bean id="blUnCodeLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlUnCodeLogicImpl">
+		<property name="blUnCodeDao" ref="blUnCodeDao"/>
+	</bean>	
+	<bean id="blCostSaleLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlCostSaleLogicImpl">
+		<property name="blCostSaleDao" ref="blCostSaleDao"/>
+	</bean>
+	<bean id="blEEILogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlEEILogicImpl">
+		<property name="blEEIDao" ref="blEEIDao"/>
+	</bean>
+	<bean id="blContainerLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlContainerLogicImpl">
+		<property name="blContainerDao" ref="blContainerDao"/>
+	</bean>
+	<bean id="blInlandCSLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlInlandCSLogicImpl">
+		<property name="blInlandCSDao" ref="blInlandCSDao"/>
+	</bean>
+	<bean id="blFreightInvoiceLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlFreightInvoiceLogicImpl">
+		<property name="blFreightInvoiceDao" ref="blFreightInvoiceDao"/>
+	</bean>
+	<bean id="blOtherInvoiceLogic" class="com.lotrading.softlot.LODepartment.shipments.logic.impl.BlOtherInvoiceLogicImpl">
+		<property name="blOtherInvoiceDao" ref="blOtherInvoiceDao"/>
+	</bean>
+	
+	<!-- 4.8 Warehouse Module -->
+	<bean id="whReceiptLogic" class="com.lotrading.softlot.warehouse.logic.impl.WhReceiptLogicImpl">
+		<property name="whReceiptDao" ref="whReceiptDao"/>
+	</bean>	
+	<bean id="whItemLogic" class="com.lotrading.softlot.warehouse.logic.impl.WhItemLogicImpl">
+		<property name="whItemDao" ref="whItemDao"/>
+	</bean>	
+	<bean id="whLocationLogic" class="com.lotrading.softlot.warehouse.logic.impl.WhLocationLogicImpl">
+		<property name="whLocationDao" ref="whLocationDao"/>
+	</bean>
+	
+	<!-- 4.9 Invoice Module -->
+	<bean id="palletizedItemLogic" class="com.lotrading.softlot.invoice.logic.impl.PalletizedItemLogicImpl">
+		<property name="palletizedItemDao" ref="palletizedItemDao"/>
+	</bean>	
+	<bean id="invoiceLogic" class="com.lotrading.softlot.invoice.logic.impl.InvoiceLogicImpl">
+		<property name="invoiceDao" ref="invoiceDao"/>
+	</bean>	
+	<bean id="packingListItemLogic" class="com.lotrading.softlot.invoice.logic.impl.PackingListItemLogicImpl">
+		<property name="packingListItemDao" ref="packingListItemDao"/>
+	</bean>	
+	
+
+	<!-- ====================== CONFIGURACION TRANSACCIONAL ======================= -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="load*" read-only="true"/>
+			<tx:method name="search*" read-only="true"/>
+			<tx:method name="*" propagation="REQUIRED" isolation="READ_COMMITTED" timeout="1800" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- Configuracion AOP para que el advise transaccional corra sobre las operaciones indicadas
+		y especificadas en la capa de negocio -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="MetodosTransaccionales" expression="execution(* com.lotrading..*Logic.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="MetodosTransaccionales" />
+	</aop:config>
+	
+</beans>

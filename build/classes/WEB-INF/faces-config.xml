@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+<application>     
+	<variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+	<view-handler>org.ajax4jsf.application.AjaxViewHandler</view-handler>
+</application>
+
+<converter>
+	<converter-id>resourceConverter</converter-id>
+	<converter-class>com.lotrading.softlot.util.base.jsf.components.ResourceConverter</converter-class>
+</converter>
+ <converter>
+	<converter-id>currencyEuroConverter</converter-id>
+	<converter-class>com.lotrading.softlot.util.base.jsf.components.currencyEuroConverter</converter-class>
+</converter>
+ <converter>
+	<converter-id>currencyDollarConverter</converter-id>
+	<converter-class>com.lotrading.softlot.util.base.jsf.components.currencyDollarConverter</converter-class>
+</converter>
+
+ 
+<managed-bean>
+	<managed-bean-name>loginControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.security.control.LoginControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>employeeLogic</property-name>
+		<value>#{employeeLogic}</value>
+	</managed-property>	
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>toolbarControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.security.control.ToolbarControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>resourceLogic</property-name>
+		<value>#{resourceLogic}</value>
+	</managed-property>	
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>employeeControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.security.control.EmployeeControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>employeeLogic</property-name>
+		<value>#{employeeLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>roleLogic</property-name>
+		<value>#{roleLogic}</value>
+	</managed-property>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>optionControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.security.control.OptionControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>optionLogic</property-name>
+		<value>#{optionLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>resourceLogic</property-name>
+		<value>#{resourceLogic}</value>
+	</managed-property>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>resourceControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.security.control.ResourceControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>resourceLogic</property-name>
+		<value>#{resourceLogic}</value>
+	</managed-property>	
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>portControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.setup.control.PortControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>portLogic</property-name>
+		<value>#{portLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>cityLogic</property-name>
+		<value>#{cityLogic}</value>
+	</managed-property>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>cityControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.setup.control.CityControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>cityLogic</property-name>
+		<value>#{cityLogic}</value>
+	</managed-property>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>masterControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.setup.control.MasterControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>masterLogic</property-name>
+		<value>#{masterLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>masterValueLogic</property-name>
+		<value>#{masterValueLogic}</value>
+	</managed-property>
+</managed-bean>
+<managed-bean>
+	<managed-bean-name>roleControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.security.control.RoleControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>roleLogic</property-name>
+		<value>#{roleLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>resourceLogic</property-name>
+		<value>#{resourceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>optionLogic</property-name>
+		<value>#{optionLogic}</value>
+	</managed-property>	
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>partnersControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.businessPartners.control.PartnersControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>partnerDepartmentInfoLogic</property-name>
+		<value>#{partnerDepartmentInfoLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>partnerLogic</property-name>
+		<value>#{partnerLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>cityLogic</property-name>
+		<value>#{cityLogic}</value>
+	</managed-property>		
+	<managed-property>
+		<property-name>portLogic</property-name>
+		<value>#{portLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>partnerContactLogic</property-name>
+		<value>#{partnerContactLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>shipPickupLogic</property-name>
+		<value>#{shipPickupLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>courierAccountLogic</property-name>
+		<value>#{courierAccountLogic}</value>
+	</managed-property>		
+	<managed-property>
+		<property-name>callHistoryLogic</property-name>
+		<value>#{callHistoryLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>resourceLogic</property-name>
+		<value>#{resourceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>employeeLogic</property-name>
+		<value>#{employeeLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>phoneLogic</property-name>
+		<value>#{phoneLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>clientRateLogic</property-name>
+		<value>#{clientRateLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>masterValueLogic</property-name>
+		<value>#{masterValueLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>carrierLogic</property-name>
+		<value>#{carrierLogic}</value>
+	</managed-property>	
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>clienOrderControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.LODepartment.clientOrder.control.ClientOrderControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>clientOrderLogic</property-name>
+		<value>#{clientOrderLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>clientOrderInlandCSLogic</property-name>
+		<value>#{clientOrderInlandCSLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>clientOrderSuppInfoLogic</property-name>
+		<value>#{clientOrderSuppInfoLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>callHistoryLogic</property-name>
+		<value>#{callHistoryClieOrdLogic}</value>
+	</managed-property>		
+	<managed-property>
+		<property-name>partnerLogic</property-name>
+		<value>#{partnerLogic}</value>
+	</managed-property> 		
+	<managed-property>
+		<property-name>shipPickupLogic</property-name>
+		<value>#{shipPickupLogic}</value>
+	</managed-property>		
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>carrierControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.setup.control.CarrierControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>	
+	<managed-property>
+		<property-name>masterValueLogic</property-name>
+		<value>#{masterValueLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>carrierRateLogic</property-name>
+		<value>#{carrierRateLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>carrierAwbNumberLogic</property-name>
+		<value>#{carrierAwbNumberLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>carrierLogic</property-name>
+		<value>#{carrierLogic}</value>
+	</managed-property>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>awbControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.LODepartment.shipments.control.AwbControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>awbLogic</property-name>
+		<value>#{awbLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>shipPickupLogic</property-name>
+		<value>#{shipPickupLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbCostSaleLogic</property-name>
+		<value>#{awbCostSaleLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbItemsLogic</property-name>
+		<value>#{awbItemsLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbUnCodeLogic</property-name>
+		<value>#{awbUnCodeLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbEEILogic</property-name>
+		<value>#{awbEEILogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>masterValueLogic</property-name>
+		<value>#{masterValueLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>whReceiptLogic</property-name>
+		<value>#{whReceiptLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>whItemLogic</property-name>
+		<value>#{whItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>palletizedItemLogic</property-name>
+		<value>#{palletizedItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>invoiceLogic</property-name>
+		<value>#{invoiceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>packingListItemLogic</property-name>
+		<value>#{packingListItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbPalletizedItemLogic</property-name>
+		<value>#{awbPalletizedItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbFreightInvoiceLogic</property-name>
+		<value>#{awbFreightInvoiceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbOtherInvoiceLogic</property-name>
+		<value>#{awbOtherInvoiceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>awbInlandCSLogic</property-name>
+		<value>#{awbInlandCsLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>partnerLogic</property-name>
+		<value>#{partnerLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>carrierAwbNumberLogic</property-name>
+		<value>#{carrierAwbNumberLogic}</value>
+	</managed-property>	
+	
+	
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>blControl</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.LODepartment.shipments.control.BlControl</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	
+	<managed-property>
+		<property-name>shipPickupLogic</property-name>
+		<value>#{shipPickupLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blCostSaleLogic</property-name>
+		<value>#{blCostSaleLogic}</value>
+	</managed-property>		
+	<managed-property>
+		<property-name>blItemLogic</property-name>
+		<value>#{blItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blPalletizedItemLogic</property-name>
+		<value>#{blPalletizedItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blUnCodeLogic</property-name>
+		<value>#{blUnCodeLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blEEILogic</property-name>
+		<value>#{blEEILogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>masterValueLogic</property-name>
+		<value>#{masterValueLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>whReceiptLogic</property-name>
+		<value>#{whReceiptLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>whItemLogic</property-name>
+		<value>#{whItemLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>whLocationLogic</property-name>
+		<value>#{whLocationLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>palletizedItemLogic</property-name>
+		<value>#{palletizedItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>invoiceLogic</property-name>
+		<value>#{invoiceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>packingListItemLogic</property-name>
+		<value>#{packingListItemLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blFreightInvoiceLogic</property-name>
+		<value>#{blFreightInvoiceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blOtherInvoiceLogic</property-name>
+		<value>#{blOtherInvoiceLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blInlandCSLogic</property-name>
+		<value>#{blInlandCSLogic}</value>
+	</managed-property>
+	<managed-property>
+		<property-name>blContainerLogic</property-name>
+		<value>#{blContainerLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>blLogic</property-name>
+		<value>#{blLogic}</value>
+	</managed-property>	
+	<managed-property>
+		<property-name>partnerLogic</property-name>
+		<value>#{partnerLogic}</value>
+	</managed-property>	
+</managed-bean>
+
+
+<managed-bean>
+	<managed-bean-name>pageMessages</managed-bean-name>
+	<managed-bean-class>com.lotrading.softlot.util.base.control.PageMessages</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+
+
+
+<navigation-rule>
+  <from-view-id>/jsp/login/login.jsp</from-view-id>
+  <navigation-case>
+   <from-outcome>NO_AUTH</from-outcome>
+   <to-view-id>/jsp/login/login.jsp</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>AUTH</from-outcome>
+   <to-view-id>/jsp/login/principal.jsp</to-view-id>
+  </navigation-case>
+</navigation-rule>
+<navigation-rule>
+  <from-view-id>/jsp/login/logout.jsp</from-view-id>
+  <navigation-case>
+   <from-outcome>LOGIN</from-outcome>
+   <to-view-id>/jsp/login/login.jsp</to-view-id>
+  </navigation-case>
+</navigation-rule>
+ 
+</faces-config>

@@ -1,0 +1,31 @@
+# DEFAULT CACHE REGION   
+
+jcs.default=
+
+#CACHE DE MEMORIA
+jcs.default.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.default.cacheattributes.MaxObjects=1000
+jcs.default.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.default.cacheattributes.UseMemoryShrinker=true
+jcs.default.cacheattributes.MaxMemoryIdleTimeSeconds=60
+jcs.default.cacheattributes.ShrinkerIntervalSeconds=15
+jcs.default.cacheattributes.MaxSpoolPerRun=100
+jcs.default.elementattributes=org.apache.jcs.engine.ElementAttributes
+jcs.default.elementattributes.IsEternal=false
+
+#CACHE AUXILIAR EN ARCHIVO
+jcs.auxiliary.DC=org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheFactory
+jcs.auxiliary.DC.attributes=org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheAttributes
+jcs.auxiliary.DC.attributes.DiskPath=/temp
+
+# REGION DE CACHE PARA LAS LISTAS
+jcs.region.listasCache=
+jcs.region.listasCache.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.region.listasCache.cacheattributes.MaxObjects=1000
+jcs.region.listasCache.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.listasCache.cacheattributes.UseMemoryShrinker=true
+jcs.region.listasCache.cacheattributes.MaxMemoryIdleTimeSeconds=60
+jcs.region.listasCache.cacheattributes.ShrinkerIntervalSeconds=15
+jcs.region.listasCache.cacheattributes.MaxSpoolPerRun=500
+jcs.region.listasCache.elementattributes=org.apache.jcs.engine.ElementAttributes
+jcs.region.listasCache.elementattributes.IsEternal=false

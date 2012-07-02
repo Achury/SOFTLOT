@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<project name="Trading-TestNG" basedir="." default="init">
+
+    <property name="testng.lib" value="../WebContent/WEB-INF/lib/testng-5.5-jdk15.jar"/>
+
+    <target name="init">
+        <tstamp/>
+    </target>
+    
+    <patternset id="jar.files">
+        <include name="**/*.jar"/>
+    </patternset>
+
+    <path id="project.class.path">
+        <fileset dir="../WebContent/WEB-INF/lib" >
+            <patternset refid="jar.files"/>
+        </fileset>
+        <pathelement location="../build/classes"/>
+    </path>
+    
+    <taskdef resource="testngtasks" classpath="${testng.lib}"/>
+    
+    <target name="All" description="All" depends="Tests"/>  
+
+    <target name="Tests" description="Tests" >
+        <dirname property="xml.dirname" file="test/conf/testng.xml"/>
+        <dirname property="src.dirname" file="testng-run.xml"/>
+        
+        <testng classpathref="project.class.path" 
+            outputDir="${src.dirname}/test-result" 
+            sourcedir="${src.dirname}"        
+            haltOnfailure="true">
+                <jvmarg value="-DmodoPruebasUnitarias=si" />
+                <xmlfileset dir="${xml.dirname}" includes="testng.xml"/>
+        </testng>
+    </target>  
+</project>

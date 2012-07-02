@@ -1,0 +1,1599 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="BLLCL"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="605"
+		 columnSpacing="0"
+		 leftMargin="7"
+		 rightMargin="0"
+		 topMargin="7"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="Field" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="totalCharges" isForPrompting="false" class="java.lang.Double"/>
+	<parameter name="blSummarizedCharges" isForPrompting="false" class="java.util.List"/>
+
+	<field name="blMaster.blNumber" class="java.lang.String"/>
+	<field name="carrier.name" class="java.lang.String"/>
+	<field name="pickupFrom.address.address" class="java.lang.String"/>
+	<field name="shipTo.address.address" class="java.lang.String"/>
+	<field name="booking" class="java.lang.String"/>
+	<field name="fullBlNumber" class="java.lang.String"/>
+	<field name="concatenatedFreightInvoices" class="java.lang.String"/>
+	<field name="blNumber" class="java.lang.String"/>
+	<field name="notifyParty" class="java.lang.String"/>
+	<field name="clientPoNumber" class="java.lang.String"/>
+	<field name="placeOfReceipt.name" class="java.lang.String"/>
+	<field name="exportInstructions" class="java.lang.String"/>
+	<field name="pierOfOrigin" class="java.lang.String"/>
+	<field name="vessel_voyage" class="java.lang.String"/>
+	<field name="portOrigin.name" class="java.lang.String"/>
+	<field name="portDestination.name" class="java.lang.String"/>
+	<field name="placeOfDelivery.name" class="java.lang.String"/>
+	<field name="typeOfMove.value1" class="java.lang.String"/>
+	<field name="concatenatedMerchandInvoices" class="java.lang.String"/>
+	<field name="totalPieces" class="java.lang.Integer"/>
+	<field name="totalRealWLb" class="java.lang.Double"/>
+	<field name="totalRealWKg" class="java.lang.Double"/>
+	<field name="totalOceanVolM3" class="java.lang.Double"/>
+	<field name="saidToContain" class="java.lang.String"/>
+	<field name="concatenatedEEICodes" class="java.lang.String"/>
+	<field name="createdDate" class="java.util.Date"/>
+	<field name="prepaid" class="java.lang.Boolean"/>
+	<field name="collect" class="java.lang.Boolean"/>
+	<field name="rated" class="java.lang.Boolean"/>
+	<field name="blMasterContainer.containerId" class="java.lang.Integer"/>
+	<field name="blMasterContainer.containerNumber" class="java.lang.String"/>
+	<field name="blMasterContainer.seal" class="java.lang.String"/>
+	<field name="printDraft" class="java.lang.Boolean"/>
+
+	<variable name="sdf" class="java.text.SimpleDateFormat" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new SimpleDateFormat("MM/dd/yyyy")]]></variableExpression>
+		<initialValueExpression><![CDATA[new SimpleDateFormat("MM/dd/yyyy")]]></initialValueExpression>
+	</variable>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="30"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="408"
+						y="3"
+						width="178"
+						height="24"
+						forecolor="#000066"
+						key="textField-47"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="14"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{printDraft}.booleanValue() ? "DRAFT -"  : "" ) + " BILL OF LADING"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="10"
+						y="-1"
+						width="247"
+						height="30"
+						forecolor="#000066"
+						key="textField-7"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="22"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{carrier.name}]]></textFieldExpression>
+				</textField>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="747"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="9"
+						y="579"
+						width="312"
+						height="140"
+						key="subreport-1">
+							<printWhenExpression><![CDATA[$F{rated}]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="prepaid">
+						<subreportParameterExpression><![CDATA[$F{prepaid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="collect">
+						<subreportParameterExpression><![CDATA[$F{collect}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{blSummarizedCharges})]]></dataSourceExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["\\WEB-INF/reports/LODepartment/bl/BLChargesLCL_SubReport.jasper"]]></subreportExpression>
+				</subreport>
+				<line direction="TopDown">
+					<reportElement
+						x="302"
+						y="1"
+						width="0"
+						height="361"
+						key="line-6"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="13"
+						y="3"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Shipper/Exporter]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="2"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Document No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="446"
+						y="2"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[BL Number:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="36"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Export References]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="46"
+						width="73"
+						height="15"
+						forecolor="#000066"
+						key="staticText-5"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[Internal Reference:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="62"
+						width="43"
+						height="15"
+						forecolor="#000066"
+						key="staticText-6"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[Export Ref:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="78"
+						width="43"
+						height="15"
+						forecolor="#000066"
+						key="staticText-7"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[Order:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="13"
+						y="33"
+						width="280"
+						height="59"
+						key="textField-1"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{pickupFrom.address.address}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="303"
+						y="34"
+						width="283"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="305"
+						y="11"
+						width="139"
+						height="21"
+						key="textField-2"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{booking}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="446"
+						y="11"
+						width="139"
+						height="21"
+						key="textField-3"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fullBlNumber}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="379"
+						y="46"
+						width="125"
+						height="15"
+						key="textField-4"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{concatenatedFreightInvoices} + "," + $F{concatenatedMerchandInvoices}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="347"
+						y="62"
+						width="237"
+						height="15"
+						key="textField-5"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{Field}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="347"
+						y="78"
+						width="237"
+						height="15"
+						key="textField-6"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{clientPoNumber}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="94"
+						width="576"
+						height="0"
+						key="line-2"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="13"
+						y="97"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-9"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Consignee]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="306"
+						y="96"
+						width="118"
+						height="9"
+						forecolor="#000066"
+						key="staticText-10"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Forwarding Agent References]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="13"
+						y="125"
+						width="280"
+						height="59"
+						key="textField-8"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{shipTo.address.address}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="305"
+						y="113"
+						width="136"
+						height="10"
+						key="staticText-11"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[LOTRADING CORP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="123"
+						width="136"
+						height="10"
+						key="staticText-12"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[10800 NW 21st STREET, SUITE 250]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="133"
+						width="136"
+						height="10"
+						key="staticText-13"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[MIAMI, FL. 33172. USA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="143"
+						width="136"
+						height="10"
+						key="staticText-14"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[NVOCC OTI LICENCE  019429N]]></text>
+				</staticText>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="447"
+						y="96"
+						width="132"
+						height="63"
+						key="image-1"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\mp\\Desktop\\LOGO LOT.jpg"]]></imageExpression>
+				</image>
+				<line direction="TopDown">
+					<reportElement
+						x="303"
+						y="162"
+						width="283"
+						height="0"
+						key="line-3"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="305"
+						y="164"
+						width="118"
+						height="9"
+						forecolor="#000066"
+						key="staticText-15"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Point and Country of Origin]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="303"
+						y="185"
+						width="284"
+						height="0"
+						key="line-4"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="305"
+						y="172"
+						width="118"
+						height="13"
+						key="textField-9"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["USA"]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="185"
+						width="292"
+						height="0"
+						key="line-5"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="13"
+						y="191"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-16"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Notify Party]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="13"
+						y="216"
+						width="280"
+						height="59"
+						key="textField-10"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{notifyParty}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="305"
+						y="190"
+						width="118"
+						height="9"
+						forecolor="#000066"
+						key="staticText-17"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[Domestic Routing/ Export Instructions]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="305"
+						y="199"
+						width="280"
+						height="110"
+						key="textField-11"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{blMasterContainer.containerId}.intValue()>0 ? "Container #: " + $F{blMasterContainer.containerNumber} + " " + "Seal: " + $F{blMasterContainer.seal} : "" ) + " " + $F{exportInstructions}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="13"
+						y="279"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-18"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Place of receipt]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="13"
+						y="288"
+						width="279"
+						height="14"
+						key="textField-12"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{placeOfReceipt.name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="13"
+						y="313"
+						width="79"
+						height="9"
+						forecolor="#000066"
+						key="staticText-20"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Vessel name/ Voy No.]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="13"
+						y="322"
+						width="140"
+						height="14"
+						key="textField-14"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{vessel_voyage}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="160"
+						y="313"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-21"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Port of Loading]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="159"
+						y="322"
+						width="140"
+						height="14"
+						key="textField-15"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{portOrigin.name}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="11"
+						y="311"
+						width="292"
+						height="0"
+						key="line-8"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="13"
+						y="348"
+						width="140"
+						height="14"
+						key="textField-16"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{portDestination.name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="160"
+						y="339"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-22"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Place Of Delivery]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="159"
+						y="348"
+						width="140"
+						height="14"
+						key="textField-17"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{placeOfDelivery.name}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="11"
+						y="337"
+						width="292"
+						height="0"
+						key="line-9"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="13"
+						y="339"
+						width="69"
+						height="9"
+						forecolor="#000066"
+						key="staticText-23"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Port Of Discharge]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="362"
+						width="576"
+						height="0"
+						key="line-10"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="389"
+						width="576"
+						height="0"
+						key="line-11"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="11"
+						y="363"
+						width="574"
+						height="26"
+						forecolor="#000066"
+						key="staticText-25"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+				<text><![CDATA[PARTICULARS FURNISHED BY SHIPPER]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="11"
+						y="391"
+						width="152"
+						height="9"
+						forecolor="#000066"
+						key="staticText-26"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Marks and Numbers]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="163"
+						y="391"
+						width="61"
+						height="9"
+						forecolor="#000066"
+						key="staticText-27"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[No.of Pkgs]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="223"
+						y="391"
+						width="224"
+						height="9"
+						forecolor="#000066"
+						key="staticText-28"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Description of Packages and Goods]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="447"
+						y="391"
+						width="80"
+						height="9"
+						forecolor="#000066"
+						key="staticText-29"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Gross weight]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="528"
+						y="391"
+						width="55"
+						height="9"
+						forecolor="#000066"
+						key="staticText-30"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Measure]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="12"
+						y="402"
+						width="23"
+						height="9"
+						forecolor="#000066"
+						key="staticText-31"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Qty]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="34"
+						y="402"
+						width="37"
+						height="9"
+						forecolor="#000066"
+						key="staticText-32"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Type]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="70"
+						y="402"
+						width="62"
+						height="9"
+						forecolor="#000066"
+						key="staticText-33"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Ctr#]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="131"
+						y="402"
+						width="32"
+						height="9"
+						forecolor="#000066"
+						key="staticText-34"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Seal]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="164"
+						y="411"
+						width="59"
+						height="12"
+						key="textField-23"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{totalPieces}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="223"
+						y="400"
+						width="224"
+						height="13"
+						key="staticText-35"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="9"/>
+					</textElement>
+				<text><![CDATA[SAID TO CONTAIN:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="224"
+						y="412"
+						width="222"
+						height="113"
+						key="textField-24"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{saidToContain}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="224"
+						y="525"
+						width="222"
+						height="47"
+						key="textField-25"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{concatenatedEEICodes}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="448"
+						y="401"
+						width="57"
+						height="12"
+						key="textField-26"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{totalRealWLb}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="528"
+						y="401"
+						width="46"
+						height="12"
+						key="textField-27"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{totalOceanVolM3}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="411"
+						width="153"
+						height="0"
+						key="line-12"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="400"
+						width="576"
+						height="0"
+						key="line-13"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="572"
+						width="576"
+						height="0"
+						key="line-22"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="448"
+						y="547"
+						width="57"
+						height="12"
+						key="textField-28"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{totalRealWLb}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="448"
+						y="559"
+						width="57"
+						height="12"
+						key="textField-29"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{totalRealWKg}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="34"
+						y="401"
+						width="0"
+						height="10"
+						key="line-23"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="70"
+						y="401"
+						width="0"
+						height="10"
+						key="line-24"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="131"
+						y="401"
+						width="0"
+						height="10"
+						key="line-25"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="223"
+						y="390"
+						width="0"
+						height="182"
+						key="line-27"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="163"
+						y="390"
+						width="0"
+						height="182"
+						key="line-28"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="447"
+						y="390"
+						width="0"
+						height="182"
+						key="line-29"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="528"
+						y="390"
+						width="0"
+						height="182"
+						key="line-30"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="331"
+						y="574"
+						width="253"
+						height="112"
+						forecolor="#000066"
+						key="staticText-37"/>
+					<box></box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[It is agreed that the goods described herein are accepted in apparent good order and condition (Except as noted) for carriage SUBJECT TO THE CODITIONS OF CONTRACT ON THE REVERSE HEREOF, ALL GOODS  MAY BE CARRIED BY ANY OTHERS MEANS INCLUDING ROAD OR ANY OTHER CARRIER UNLESS SPECIFIC CONTRARY INSTRUCTIONS ARE GIVEN HEREON BY THE SHIPPER, AND SHIPPER AGRESS THAT THE SHIPMENT MAY BE CARRIED VIA INTERMEDIATE STOPPING PLACES WHICH THE CARRIER DEEMS APPROPIATE. THE SHIPPERS' ATTENTION IS DRAW TO THE NOTICE CONCERNING CARRIERS LIMITATION OF LIABILITY. Shipper may increase such limitation of liability by declaring a higher value for carriage and paying a supplemental charge if required.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="10"
+						y="580"
+						width="153"
+						height="9"
+						forecolor="#000066"
+						key="staticText-38"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[DESCRIPTION OF CHARGES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="164"
+						y="580"
+						width="82"
+						height="9"
+						forecolor="#000066"
+						key="staticText-39"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[PREPAID]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="247"
+						y="580"
+						width="82"
+						height="9"
+						forecolor="#000066"
+						key="staticText-40"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[COLLECT]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="589"
+						width="320"
+						height="0"
+						key="line-31"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="163"
+						y="573"
+						width="0"
+						height="162"
+						key="line-41"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="246"
+						y="573"
+						width="0"
+						height="162"
+						key="line-42"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="329"
+						y="572"
+						width="0"
+						height="162"
+						key="line-44"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="330"
+						y="694"
+						width="22"
+						height="14"
+						forecolor="#000066"
+						key="staticText-41"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+				<text><![CDATA[BY:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="353"
+						y="694"
+						width="103"
+						height="14"
+						key="staticText-42"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<text><![CDATA[LO Trading as agents for ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="456"
+						y="694"
+						width="128"
+						height="14"
+						key="textField-30"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{carrier.name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="330"
+						y="712"
+						width="37"
+						height="14"
+						forecolor="#000066"
+						key="staticText-43"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+				<text><![CDATA[Dated:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="366"
+						y="712"
+						width="69"
+						height="14"
+						key="textField-31"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$V{sdf}.format($F{createdDate})+""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="456"
+						y="717"
+						width="128"
+						height="14"
+						key="textField-32"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="11"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{booking}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="113"
+						y="722"
+						width="38"
+						height="9"
+						key="staticText-44"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="734"
+						width="576"
+						height="0"
+						key="line-45"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="586"
+						y="0"
+						width="0"
+						height="735"
+						key="line-46"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="0"
+						width="0"
+						height="735"
+						key="line-47"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="0"
+						width="576"
+						height="0"
+						key="line-48"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="444"
+						y="0"
+						width="0"
+						height="34"
+						key="line-49"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="515"
+						y="46"
+						width="69"
+						height="15"
+						key="textField-34"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{blNumber}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="10"
+						y="276"
+						width="292"
+						height="0"
+						key="line-50"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="303"
+						y="311"
+						width="284"
+						height="0"
+						key="line-51"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="305"
+						y="312"
+						width="84"
+						height="9"
+						forecolor="#000066"
+						key="staticText-45"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Loading Pier Terminal]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="305"
+						y="321"
+						width="279"
+						height="14"
+						key="textField-35"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{pierOfOrigin}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="303"
+						y="337"
+						width="284"
+						height="0"
+						key="line-52"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="305"
+						y="339"
+						width="84"
+						height="9"
+						forecolor="#000066"
+						key="staticText-46"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="7"/>
+					</textElement>
+				<text><![CDATA[Type Of Move]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="305"
+						y="348"
+						width="279"
+						height="14"
+						key="textField-36"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{typeOfMove.value1}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="156"
+						y="312"
+						width="0"
+						height="50"
+						key="line-53"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="12"
+						y="559"
+						width="150"
+						height="13"
+						forecolor="#000066"
+						key="staticText-47"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+				<text><![CDATA[TOTAL NO. PKGS.]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="164"
+						y="559"
+						width="59"
+						height="12"
+						key="textField-37"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{totalPieces}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="504"
+						y="401"
+						width="24"
+						height="12"
+						key="staticText-48"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<text><![CDATA[Lbs.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="504"
+						y="547"
+						width="24"
+						height="13"
+						key="staticText-49"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<text><![CDATA[Lbs.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="504"
+						y="559"
+						width="24"
+						height="12"
+						key="staticText-50"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<text><![CDATA[Kgs.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="574"
+						y="401"
+						width="9"
+						height="12"
+						key="staticText-51"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<text><![CDATA[M]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="583"
+						y="401"
+						width="3"
+						height="12"
+						key="staticText-52"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="5"/>
+					</textElement>
+				<text><![CDATA[3]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="528"
+						y="547"
+						width="46"
+						height="12"
+						key="textField-41"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{totalOceanVolM3}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="574"
+						y="547"
+						width="9"
+						height="12"
+						key="staticText-53"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="8"/>
+					</textElement>
+				<text><![CDATA[M]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="583"
+						y="547"
+						width="3"
+						height="12"
+						key="staticText-54"/>
+					<box></box>
+					<textElement>
+						<font fontName="Lucida Bright" size="5"/>
+					</textElement>
+				<text><![CDATA[3]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="163"
+						y="719"
+						width="82"
+						height="14"
+						key="textField-42"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="11"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[( $F{prepaid}.booleanValue() && $F{rated}.booleanValue() ? $P{totalCharges} : null )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="247"
+						y="719"
+						width="82"
+						height="14"
+						key="textField-43"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="11"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[( $F{collect}.booleanValue() && $F{rated}.booleanValue() ? $P{totalCharges} : null )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="10"
+						y="590"
+						width="153"
+						height="12"
+						forecolor="#000000"
+						key="textField-44"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{rated}.booleanValue() ?  "": "UNRATED" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="164"
+						y="590"
+						width="82"
+						height="12"
+						forecolor="#000000"
+						key="textField-45"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{prepaid}.booleanValue() && !$F{rated}.booleanValue() ?  "PREPAID": "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="247"
+						y="590"
+						width="82"
+						height="12"
+						forecolor="#000000"
+						key="textField-46"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{collect}.booleanValue() && !$F{rated}.booleanValue() ?  "COLLECT": "" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

@@ -1,0 +1,90 @@
+.stylefilterDatePanel .rich-panel-body{
+	vertical-align:middle;
+	font-family: Arial,Verdana,sans-serif;
+	font-size:11px;
+	padding:4px 0px 2px 0px;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+}
+
+.styleInput input, textarea{
+	width: 240px;
+	padding: 1px 0px 1px 5px;
+}
+
+.styleInput2 input{
+	width: 150px;
+	padding: 1px 0px 1px 5px;
+}
+
+.styleInput2{
+	border-collapse: separate;
+ 	border-spacing:  3px 2px;
+ 	font-family: "Verdana";
+	font-size:11px;
+}
+
+.styleInput3 input{
+	width: 70px;
+	padding: 1px 0px 1px 5px;
+}
+
+.styleInput3{
+	border-collapse: separate;
+ 	border-spacing:  3px 2px;
+ 	font-family: "Verdana";
+	font-size:11px;
+}
+
+.styleInput4 input{
+	width: 90px;
+	padding: 1px 0px 1px 5px;
+}
+
+.styleInput4{
+	border-collapse: separate;
+ 	border-spacing:  0px 2px;
+ 	font-family: "Verdana";
+	font-size:11px;
+}
+
+.styleInput5 input{
+	width: 65px;
+	padding: 1px 0px 1px 5px;
+}
+
+.styleInput5{
+	border-collapse: separate;
+ 	border-spacing:  3px 2px;
+ 	font-family: "Verdana";
+	font-size:11px;
+}
+
+.headerPanel{
+	background-color: #FFFFFF;	
+	width: 20%;	
+	position: absolute;	
+	left: 7%;
+	font-size:9px;
+	vertical-align: top;	
+}
+
+.styleInput6 {
+	background-color:#F1F1F1; 
+	color:#000000;
+	border: none;
+}
+
+.styleInput7{
+	background-color:#FFFFFF; 
+	color:#000000;
+	border: 1px solid;
+}
+
+.saidToContainItem option {    
+    width: 233px;
+}
+
+.CSNoResize sdt-hsep{
+		display: none;
+}

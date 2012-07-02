@@ -1,0 +1,20 @@
+/IAwbCostSaleLogic.java/1.3/Wed Feb 29 18:23:10 2012//
+/IAwbEEILogic.java/1.3/Wed Feb 29 18:23:10 2012//
+/IAwbFreightInvoiceLogic.java/1.4/Fri Mar 30 17:46:02 2012//
+/IAwbInlandCsLogic.java/1.4/Wed Apr  4 15:38:23 2012//
+/IAwbItemsLogic.java/1.3/Fri Mar 23 18:16:44 2012//
+/IAwbLogic.java/1.23/Mon Jul  2 17:34:43 2012//
+/IAwbOtherInvoiceLogic.java/1.4/Fri Mar 30 17:46:02 2012//
+/IAwbPalletizedItemLogic.java/1.1/Thu Jun 21 17:25:43 2012//
+/IAwbUnCodeLogic.java/1.4/Tue Feb 14 17:53:01 2012//
+/IBlContainerLogic.java/1.2/Mon Jul  2 17:34:43 2012//
+/IBlCostSaleLogic.java/1.2/Mon Feb 27 20:20:29 2012//
+/IBlEEILogic.java/1.2/Wed Apr 25 18:52:09 2012//
+/IBlFreightInvoiceLogic.java/1.2/Mon Apr 16 14:40:40 2012//
+/IBlInlandCSLogic.java/1.3/Mon Jul  2 17:34:42 2012//
+/IBlItemLogic.java/1.2/Mon Feb 27 20:20:29 2012//
+/IBlLogic.java/1.20/Mon Jul  2 17:34:41 2012//
+/IBlOtherInvoiceLogic.java/1.2/Mon Apr 16 14:40:40 2012//
+/IBlPalletizedItemLogic.java/1.1/Wed Jun 20 15:37:27 2012//
+/IBlUnCodeLogic.java/1.2/Mon Feb 27 20:20:29 2012//
+D/impl////

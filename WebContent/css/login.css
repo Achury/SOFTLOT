@@ -1,0 +1,52 @@
+BODY {
+	background-image: url(../../css/images/LO_logo.jpg);
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+.formLoginback {
+	border-radius: 15px 15px 15px 15px;
+	background-color: #0069ab;
+	filter: alpha(opacity =   50);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+	border: solid 1px #a1a1a1;
+	padding: 15px;
+	width: 380px;
+	position: absolute;
+	top: 30%;
+	left: 36%;
+}
+
+.formLogin {
+	font-size: 11px;
+	font-family: verdana;
+	padding: 15px;
+	width: 390px;
+	position: absolute;
+	top: 30%;
+	left: 36%;
+}
+
+/* .formLogin input[type=text] input[type=password] {
+	display: block;
+	width: 30px;
+	float: left;
+	margin-bottom: 10px;
+} */
+
+.inputText {
+	width: 110px;
+}
+.buttonsLogin{
+	font-family:Verdana;
+	font-size: 11px;
+}
+
+.labelinfoStyle {
+	color: green;
+}
+
+.labelerrorStyle {
+	color: red;
+}
